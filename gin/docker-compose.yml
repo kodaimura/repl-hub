@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    volumes:
+      - ./goat-test:/usr/src/app
+    working_dir: /usr/src/app
+    tty: true
+
+  db:
+    container_name: db # ホスト名にもなる
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=goat-test
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      # DDL実行
+      - ./goat-test/scripts:/docker-entrypoint-initdb.d
+      # DB永続化設定
+      - data:/var/lib/postgresql/data 
+  
+# DB永続化設定
+volumes:
+  data:
+    driver: local
