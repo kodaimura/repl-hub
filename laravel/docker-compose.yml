@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+    ports:
+      - "8000:80"
+    depends_on:
+      - db
+    volumes:
+      - ./php.ini:/usr/local/etc/php/php.ini
+      - ./html:/var/www/html
+    working_dir: /var/www/
+    tty: true
+
+  db:
+    container_name: db # ホスト名にもなる
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=dbname
+    volumes:
+      - ./my.ini:/etc/mysql/conf.d/my.cnf
+      # DDL実行
+      # - ./mysql/initdb.d:/docker-entrypoint-initdb.d
+      # DB永続化設定
+      - data:/var/lib/mysql
+  
+# DB永続化設定
+volumes:
+  data:
+    driver: local

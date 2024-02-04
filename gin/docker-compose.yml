@@ -13,6 +13,8 @@ services:
       - ./goat-test:/usr/src/app
     working_dir: /usr/src/app
     tty: true
+    environment:
+      - ENV=local
 
   db:
     container_name: db # ホスト名にもなる
