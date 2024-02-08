@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   app:
-    container_name: app
+    container_name: laravel-app
     build:
       context: .
     ports:
@@ -11,24 +11,18 @@ services:
       - db
     volumes:
       - ./php.ini:/usr/local/etc/php/php.ini
-      - ./html:/var/www/html
+      - ./laravel-app:/var/www/html
     working_dir: /var/www/
     tty: true
 
   db:
-    container_name: db # ホスト名にもなる
-    image: mysql:latest
+    container_name: laravel-app-db
+    image: mysql:8.0.3
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=dbname
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel-app-db
+      TZ: Asia/Tokyo
     volumes:
       - ./my.ini:/etc/mysql/conf.d/my.cnf
-      # DDL実行
-      # - ./mysql/initdb.d:/docker-entrypoint-initdb.d
-      # DB永続化設定
-      - data:/var/lib/mysql
-  
-# DB永続化設定
-volumes:
-  data:
-    driver: local
+      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
+      - ./data:/var/lib/mysql
