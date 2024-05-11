@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: python-app
+    build:
+      context: .
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
