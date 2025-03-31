@@ -16,8 +16,11 @@ python:
 julia:
 	docker compose exec julia bash
 
+racket:
+	docker compose exec racket bash
+
 node:
 	docker compose exec node bash
 
-racket:
-	docker compose exec racket bash
+php:
+	docker compose exec php bash

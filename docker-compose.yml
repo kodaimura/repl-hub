@@ -9,13 +9,18 @@ services:
     stdin_open: true
     tty: true
 
-  node:
-    image: node:latest
-    stdin_open: true
-    tty: true
-
   racket:
     image: racket/racket:latest
     stdin_open: true
     tty: true
     platform: linux/amd64
+
+  node:
+    image: node:latest
+    stdin_open: true
+    tty: true
+
+  php:
+    image: php:latest
+    stdin_open: true
+    tty: true
