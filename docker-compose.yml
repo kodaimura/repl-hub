@@ -1,0 +1,21 @@
+services:
+  python:
+    image: python:latest
+    stdin_open: true
+    tty: true
+
+  julia:
+    image: julia:latest
+    stdin_open: true
+    tty: true
+
+  node:
+    image: node:latest
+    stdin_open: true
+    tty: true
+
+  racket:
+    image: racket/racket:latest
+    stdin_open: true
+    tty: true
+    platform: linux/amd64
